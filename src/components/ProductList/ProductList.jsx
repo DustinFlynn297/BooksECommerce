@@ -12,6 +12,7 @@ const ProductList = (props) => {
             return (
               <tr key={product.id}>
                 <td>{product.productName}</td>
+                <td className="buttonCenter"><button href = "#" className = "btn btn-outline-success button-row" onClick={() => props} >Like</button></td>
               </tr>
             );
           })}

@@ -1,23 +1,25 @@
-import React, {Component} from "react";
-import {TextField} from "@mui/material";
+import React, { Component } from "react";
+import { TextField } from "@mui/material";
 import styled from "styled-components";
 const SearchBarDiv = styled.div`
   width: 14%;
-`
+`;
+
 export class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchQuery: ""
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchQuery: "",
+        };
     }
-  }
-  handleSearchQueryOnChanged = (event) => {
+    // let getAllBooks = this.props.getAllBooks();
+  handleSearchQueryOnChanged = (event, props) => {
     const newSearchQuery = event.target.value;
     this.setState({
-      searchQuery: newSearchQuery
+        searchQuery: newSearchQuery,
     });
-    this.props.searchSong(newSearchQuery);
-  }
+    props.getAllBooks(newSearchQuery);
+  };
   // handleChange = (event) => {
   //   this.setState({
   //     [event.target.name]: event.target.value
@@ -25,8 +27,8 @@ export class SearchBar extends Component {
   // }
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.searchSong(this.state.searchQuery);
-  }
+    this.props.getAllBooks(this.state.searchQuery);
+  };
   render() {
     // this.filter.props(song => {
     //   return Object.keys(song).some(key => song[key].toLowerCase().includes(filter.toLowerCase()))
@@ -34,22 +36,22 @@ export class SearchBar extends Component {
     return (
       <SearchBarDiv>
         <div>
-          <h1>Song Search</h1>
+          <h1>Product Search</h1>
           <form
             action=""
             method="get"
-            // onSubmit={this.handleSubmit}
+            onSubmit={this.handleSubmit}
           >
             <TextField
-              label="Search" color="secondary" focused
+              color="secondary" focused
               type="text"
               value={this.props.searchQuery}
               onChange={this.handleSearchQueryOnChanged}
             />
-            {/*<button type="submit">Search</button>*/}
+            <button type="submit">Search</button>
           </form>
         </div>
       </SearchBarDiv>
-    )
+    );
   }
 }
