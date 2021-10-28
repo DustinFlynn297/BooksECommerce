@@ -2,9 +2,14 @@ import './App.css';
 import React, { Component } from 'react';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-import { Redirect, Switch, Route } from 'react-router';
+// import { Redirect, Switch, Route } from 'react-router';
 import {RegisterUser} from "./components/Register/Register";
+import {BrowserRouter as Router,
+Switch,
+Route,
+Link} from "react-router-dom";
 // import {registerUser} from ''
+
 
 class App extends Component {
   state = {
