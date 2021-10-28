@@ -13,6 +13,8 @@ class App extends Component {
   state = {
     userLoggedIn: null,
     books: [],
+    reviews: [],
+    book: [],
   }
 
   componentDidMount() {
@@ -60,6 +62,38 @@ class App extends Component {
     this.setState({userLoggedIn : null});
   }
 
+  getBookReviews = async (bookId) => {
+    try{
+      let response = await axios.get(`https://localhost:44394/api/review/${bookId}`);
+      this.setState({
+        reviews: response.data
+      })
+    }
+    catch(er) {
+      console.log("Error with getBooksReview", er)
+    }
+  }
+
+  getSingleBook = async (bookId) => {
+    try{
+      let response = await axios.get(`https://localhost:44394/api/products/${bookId}`);
+      this.setState({
+        book: response.data
+      })
+    }
+    catch(er) {
+      console.log("Error with getSingleBook", er)
+    }
+  }
+
+  addToCart = async (userId, productId) => {
+    try{
+      await axios.post(`https://localhost:44394/api/shoppingCart/${userId}/${productId}`);
+    }
+    catch(er) {
+      console.log("Error with addToCart", er)
+    }
+  }
   render() {
     return (
       <div className="App">
@@ -68,6 +102,7 @@ class App extends Component {
             <Route path = "/" exact component = {Landing} />
             <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
+            <Route path = "/bookDetails" render = {props => <ProductDetail {...props} user = {this.state.userLoggedIn}  getAllBooks = {this.getAllBooks} getSingleBook = {this.getSingleBook}  addToCart = {this.addToCart} book = {this.state.book} /> }/>
           </Switch>
         </header>
       </div>
