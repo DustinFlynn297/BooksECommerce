@@ -11,6 +11,7 @@ const Login = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.loggin(loginUser);
+    window.location = '/';
   };
   return (
     <div>
@@ -30,6 +31,7 @@ const Login = (props) => {
           onChange={handleChange}
           type="text"
         />
+        <button type = "submit">Login</button>
       </form>
     </div>
   );
