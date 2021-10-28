@@ -4,6 +4,8 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { Redirect, Switch, Route } from 'react-router';
 import {RegisterUser} from "./components/Register/Register";
+import Landing from './components/Landing/Landing';
+import Login from './components/Login/Login';
 // import {registerUser} from ''
 
 class App extends Component {
@@ -35,6 +37,7 @@ class App extends Component {
     try {
       const response = await axios.post('https://localhost:44394/api/authentication' , userToBeRegisteredObject);
       this.logInUser({'userName' : userToBeRegisteredObject.userName, 'password': userToBeRegisteredObject.password })
+      window.location = '/register';
     } catch(error) {
       console.log(error, 'error with register user');
     }
@@ -61,7 +64,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Switch>
-            <Route path="/register" render={props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
+            <Route path = "/" exact component = {Landing} />
+            <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
+            <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
           </Switch>
         </header>
       </div>
