@@ -7,13 +7,14 @@ function ProductDetail(props) {
     }, []);
 
     const book = props.book
+    console.log(props.book)
 
     return(
         <div>
-            <h1> {book.ProductName} </h1>
-            <p> {book.ProductDescription} </p>
-            <p> {book.Price} </p>
-            <p> {book.Genre} </p>
+            <h1> {book.productName} </h1>
+            <p> {book.productDescription} </p>
+            <p> {book.price} </p>
+            <p> {book.genre} </p>
             <div>
                 <button onClick = {() => props.addToCart({
                     UserId: props.user.id,

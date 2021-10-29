@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ProductList.css";
+import { Link } from "react-router-dom";
 
 const ProductList = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,13 +38,14 @@ const ProductList = (props) => {
                 {book.genre}
               </td>
               <td className="buttonCenter">
-                <button
-                  href="#"
-                  className="btn btn-outline-success button-row"
-                  onClick={() => props}
-                >
-                  Like
-                </button>
+                <Link to = {`/bookDetails/${book.id}`}>
+                  <button
+                    className="btn btn-outline-success button-row"
+                    onClick={() => props.getSingleBook(book.id)}
+                  >
+                    Book Info
+                  </button>
+                </Link>
               </td>
             </tr>
           ))}
