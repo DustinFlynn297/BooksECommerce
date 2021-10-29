@@ -100,8 +100,9 @@ class App extends Component {
   postReview = async (review) => {
       console.log(review)
     try {
-      await axios.post(`https://localhost:44394/api/review/${review.productId}`);
+      await axios.post(`https://localhost:44394/api/review`, review);
       // this.getBookReviews(review.productId);
+      // window.location = `/bookDetails/${review.productId}`
     }
     catch(error) {
       console.log("Error with Post Review line 100 App.js" , error);
