@@ -7,6 +7,7 @@ import {RegisterUser} from "./components/Register/Register";
 import Landing from './components/Landing/Landing';
 import Login from './components/Login/Login';
 import ProductList from './components/ProductList/ProductList';
+import ProductDetail from './components/ProductDetail/ProductDetail';
 // import {registerUser} from ''
 
 
@@ -104,7 +105,7 @@ class App extends Component {
             <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
             <Route path = "/bookDetails" render = {props => <ProductDetail {...props} user = {this.state.userLoggedIn}  getAllBooks = {this.getAllBooks} getSingleBook = {this.getSingleBook}  addToCart = {this.addToCart} book = {this.state.book} /> }/>
-            <Route path = "/products" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} />} />
+            <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} />} />
           </Switch>
         </header>
       </div>

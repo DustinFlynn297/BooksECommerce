@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 
-function BookDetails(props) {
+function ProductDetail(props) {
 
     useEffect(() => {
         props.getBookReviews(book.id)
@@ -25,3 +25,4 @@ function BookDetails(props) {
         </div>
     );
 }
+export default ProductDetail;
