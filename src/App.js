@@ -8,6 +8,7 @@ import Landing from './components/Landing/Landing';
 import Login from './components/Login/Login';
 import ProductList from './components/ProductList/ProductList';
 import ProductDetail from './components/ProductDetail/ProductDetail';
+import AddNewProduct from './components/AddNewProduct/AddNewProduct';
 // import {registerUser} from ''
 
 
@@ -96,6 +97,17 @@ class App extends Component {
       console.log("Error with addToCart", er)
     }
   }
+  
+  addNewProduct = async (newProductObject) => {
+    try{
+      let response = await axios.post("https://localhost:44394/api/products", newProductObject);
+        console.log(response)
+    } catch (er) {
+      console.log("Error with AddNewProduct", er);
+    }
+  };
+
+
   render() {
     return (
       <div className="App">
@@ -106,6 +118,7 @@ class App extends Component {
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
             <Route path = "/bookDetails" render = {props => <ProductDetail {...props} user = {this.state.userLoggedIn}  getAllBooks = {this.getAllBooks} getSingleBook = {this.getSingleBook}  addToCart = {this.addToCart} book = {this.state.book} /> }/>
             <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />
+            <Route path = "/addNew" render = {props => <AddNewProduct {...props} addNewProduct = {this.addNewProduct} />} />
           </Switch>
         </header>
       </div>
