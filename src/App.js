@@ -96,6 +96,18 @@ class App extends Component {
       console.log("Error with addToCart", er)
     }
   }
+
+  postReview = async (review) => {
+      console.log(review)
+    try {
+      await axios.post(`https://localhost:44394/api/review/${review.productId}`);
+      // this.getBookReviews(review.productId);
+    }
+    catch(error) {
+      console.log("Error with Post Review line 100 App.js" , error);
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -104,8 +116,18 @@ class App extends Component {
             <Route path = "/" exact component = {Landing} />
             <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
-            <Route path = "/bookDetails" render = {props => <ProductDetail {...props} user = {this.state.userLoggedIn}  getAllBooks = {this.getAllBooks} getSingleBook = {this.getSingleBook}  addToCart = {this.addToCart} book = {this.state.book} /> }/>
-            <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />
+            <Route path = "/bookDetails" render = {props => <ProductDetail {...props}
+                                                                           user = {this.state.userLoggedIn}
+                                                                           getAllBooks = {this.getAllBooks}
+                                                                           getSingleBook = {this.getSingleBook}
+                                                                           addToCart = {this.addToCart}
+                                                                           book = {this.state.book}
+                                                                           postReview={this.postReview}
+                                                                           getBookReviews={this.getBookReviews}
+                                                                           reviews={this.state.reviews} /> }/>
+            <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks}
+                                                                   books = {this.state.books}
+                                                                   getSingleBook = {this.getSingleBook} />} />
           </Switch>
         </header>
       </div>
