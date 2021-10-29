@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react'
+import ReviewBlock from "../ReviewBlock/ReviewBlock";
 
 function ProductDetail(props) {
 
     useEffect(() => {
-        props.getBookReviews(book.id)
-    }, []);
+        props.getBookReviews(props.book.id)
+    }, [props.book]);
 
     const book = props.book
     console.log(props.book)
@@ -23,6 +24,11 @@ function ProductDetail(props) {
                 })}
                 variant = "Success">Add To Cart</button>
             </div>
+            <ReviewBlock reviews={props.reviews}
+                         postReview={props.postReview}
+                         getBooksReviews={props.getBookReviews}
+                         book={props.book}
+                         user={props.user}  />
         </div>
     );
 }

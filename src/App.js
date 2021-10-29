@@ -109,6 +109,18 @@ class App extends Component {
   };
 
 
+  postReview = async (review) => {
+      console.log(review)
+    try {
+      await axios.post(`https://localhost:44394/api/review`, review);
+      // this.getBookReviews(review.productId);
+      // window.location = `/bookDetails/${review.productId}`
+    }
+    catch(error) {
+      console.log("Error with Post Review line 100 App.js" , error);
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -122,6 +134,18 @@ class App extends Component {
             <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />
             <Route path = "/addNew" render = {props => <AddNewProduct {...props} addNewProduct = {this.addNewProduct} />} />
             <Redirect to = '/' />
+            <Route path = "/bookDetails" render = {props => <ProductDetail {...props}
+                                                                           user = {this.state.userLoggedIn}
+                                                                           getAllBooks = {this.getAllBooks}
+                                                                           getSingleBook = {this.getSingleBook}
+                                                                           addToCart = {this.addToCart}
+                                                                           book = {this.state.book}
+                                                                           postReview={this.postReview}
+                                                                           getBookReviews={this.getBookReviews}
+                                                                           reviews={this.state.reviews} /> }/>
+            <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks}
+                                                                   books = {this.state.books}
+                                                                   getSingleBook = {this.getSingleBook} />} />
           </Switch>
         </header>
       </div>
