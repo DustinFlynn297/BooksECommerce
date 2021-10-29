@@ -1,22 +1,52 @@
-import React from "react";
-import { SearchBar } from "../SearchBar/SearchBar";
-// import Product from "../Product/Product";
+import React, { useState } from "react";
+import "./ProductList.css";
 
 const ProductList = (props) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
-    <div>
-        <SearchBar />
+    <div className="searching">
+      <input
+        type="text"
+        placeholder="Search by Genre or Book Name"
+        onChange={(event) => {
+          setSearchTerm(event.target.value);
+        }}
+      />
       <table>
-        <tbody>
-          {props.books.map((product) => {
-            return (
-              <tr key={product.id}>
-                <td>{product.productName}</td>
-                <td className="buttonCenter"><button href = "#" className = "btn btn-outline-success button-row" onClick={() => props} >Like</button></td>
-              </tr>
-            );
-          })}
-        </tbody>
+        {props.books
+          .filter((foundBooks) => {
+            if (searchTerm === "") {
+              return foundBooks;
+            } else if (
+              foundBooks.productName
+                .toLowerCase()
+                .includes(searchTerm.toLocaleLowerCase()) ||
+              foundBooks.genre
+                .toLowerCase()
+                .includes(searchTerm.toLocaleLowerCase())
+            ) {
+              return foundBooks;
+            }
+          })
+          .map((book) => (
+            <tr key={book.id}>
+              <td>
+                {book.productName}
+                {book.price}
+                {book.genre}
+              </td>
+              <td className="buttonCenter">
+                <button
+                  href="#"
+                  className="btn btn-outline-success button-row"
+                  onClick={() => props}
+                >
+                  Like
+                </button>
+              </td>
+            </tr>
+          ))}
       </table>
     </div>
   );
