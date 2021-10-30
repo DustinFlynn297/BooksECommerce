@@ -124,28 +124,36 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
         <header className="App-header">
           <NavBar />
           <Switch>
             <Route path = "/" exact component = {Landing} />
             <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
-            <Route path = "/bookDetails" render = {props => <ProductDetail {...props} user = {this.state.userLoggedIn}  getAllBooks = {this.getAllBooks} getSingleBook = {this.getSingleBook}  addToCart = {this.addToCart} book = {this.state.book} /> }/>
             <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />
             <Route path = "/addNew" render = {props => <AddNewProduct {...props} addNewProduct = {this.addNewProduct} />} />
-            <Redirect to = '/' />
-            <Route path = "/bookDetails" render = {props => <ProductDetail {...props}
-                                                                           user = {this.state.userLoggedIn}
-                                                                           getAllBooks = {this.getAllBooks}
-                                                                           getSingleBook = {this.getSingleBook}
-                                                                           addToCart = {this.addToCart}
-                                                                           book = {this.state.book}
-                                                                           postReview={this.postReview}
-                                                                           getBookReviews={this.getBookReviews}
-                                                                           reviews={this.state.reviews} /> }/>
-            <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks}
-                                                                   books = {this.state.books}
-                                                                   getSingleBook = {this.getSingleBook} />} />
+            <Route path = "/bookDetails" render = {props =>
+                <ProductDetail {...props}
+                     user={this.state.userLoggedIn}
+                     getAllBooks={this.getAllBooks}
+                     getSingleBook={this.getSingleBook}
+                     addToCart={this.addToCart}
+                     book={this.state.book}
+                     postReview={this.postReview}
+                     getBookReviews={this.getBookReviews}
+                     reviews={this.state.reviews}
+              />}
+            />
+            <Route path = "/books" render={props =>
+                <ProductList
+                    {...props}
+                    getAllBooks={this.getAllBooks}
+                    books = {this.state.books}
+                    getSingleBook = {this.getSingleBook}
+                />}
+            />
+            <Redirect to = "/" />
           </Switch>
         </header>
       </div>

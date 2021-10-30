@@ -4,7 +4,7 @@ import CreateReview from "../CreateReview/CreateReview";
 const ReviewBlock = (props) => {
 
 
-const book = props.book;
+// const book = props.book;
 
 
     return(
@@ -17,16 +17,14 @@ const book = props.book;
                 book={props.book}
                 user={props.user}
             />
-            {props.reviews.map((review) => {
-                return(
+            {props.reviews?.map((review) => {
+                return (
                 <ul>
                     <li key={review.productId}> {review.body} </li>
                     <li key={review.productId}> {review.starRating} </li>
                 </ul>
-
-
-
-                )})}
+                )}
+            )}
 
 
         </div>

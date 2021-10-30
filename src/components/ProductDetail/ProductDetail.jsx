@@ -1,14 +1,20 @@
 import React, {useEffect} from 'react'
 import ReviewBlock from "../ReviewBlock/ReviewBlock";
 
-function ProductDetail(props) {
+export const ProductDetail = (props) => {
+
 
     useEffect(() => {
+        // alert("here 2");
+        // alert(props.getBookReviews);
+
         props.getBookReviews(props.book.id)
     }, [props.book]);
 
     const book = props.book
-    console.log(props.book)
+    {console.log("here line 12 product detail")}
+
+    console.log(props.getBookReviews)
 
     return(
         <div>
