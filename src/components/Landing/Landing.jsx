@@ -8,10 +8,8 @@ const Landing = (props) => {
   return (
     <div className="container mx-auto my-auto overflow-hidden">
       <div className="row">
-        <h1>Welcome to BB*</h1>
-
-        {/* <p>{!props.user}</p> */}
-        {/* <p>{props.user.firstName}</p> */}
+        <h1>Welcome to BB's Online Book Store</h1>
+        <p>{props.user?.firstName}</p>
         <p>{JSON.stringify(props.user)}</p>
       </div>
       <div className="row">
@@ -25,9 +23,9 @@ const Landing = (props) => {
                 alt="First slide"
               />
               <Carousel.Caption>
-                <h3>Not Books!</h3>
+                <h3>BB's Books</h3>
                 <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
+                  One stop shop for all Book Lovers!
                 </p>
               </Carousel.Caption>
             </Carousel.Item>
@@ -39,8 +37,8 @@ const Landing = (props) => {
               />
 
               <Carousel.Caption>
-                <h3>Books!</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3>Buy or Sell Locally!</h3>
+                <p>Support Local Businesses and Authors!</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -51,10 +49,9 @@ const Landing = (props) => {
               />
 
               <Carousel.Caption>
-                <h3>More Books!</h3>
+                <h3>Start Selling Online with Your Own Books</h3>
                 <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
+                 Set up to start selling your own collection of Books
                 </p>
               </Carousel.Caption>
             </Carousel.Item>
