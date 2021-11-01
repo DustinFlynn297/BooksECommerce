@@ -11,7 +11,7 @@ const Landing = (props) => {
         <h1>Welcome to BB*</h1>
 
         {/* <p>{!props.user}</p> */}
-        <p>{props.user.firstName}</p>
+        {/* <p>{props.user.firstName}</p> */}
         <p>{JSON.stringify(props.user)}</p>
       </div>
       <div className="row">

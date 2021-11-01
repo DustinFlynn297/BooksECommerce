@@ -14,8 +14,9 @@ const Login = (props) => {
     debugger;  
     console.log("Inside Handle Submit")
     event.preventDefault()
-    props.login(loginUser)
     console.log("handlesubmit", loginUser);
+    props.login(loginUser)
+
   }
 
   return (

@@ -10,7 +10,7 @@ import ProductList from './components/ProductList/ProductList';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import AddNewProduct from './components/AddNewProduct/AddNewProduct';
 import NavBar from './components/NavBar/NavBar';
-import {ShoppingCart} from "./components/ShoppingCart/ShoppingCart";
+import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 // import {registerUser} from ''
 
 
@@ -20,12 +20,14 @@ class App extends Component {
     books: [],
     reviews: [],
     book: [],
-    user : {}
+    user : []
   }
 
 
   componentDidMount() {
-    this.getAllBooks() ; 
+    this.getAllBooks(); 
+    let userId = this.token();
+    this.getUserDetails(userId)
   }
 
   token = () => {
@@ -35,6 +37,7 @@ class App extends Component {
       this.setState({
         userLoggedIn: user
       });
+      return user.id;
     }catch(error){
       console.log(error, "error with token function");
     }
@@ -59,14 +62,17 @@ class App extends Component {
 
   loginUser = async (loggedInUserObject) => {
     console.log("Inside LogInUser Callback")
+    console.log("object", loggedInUserObject)
     try {      
-      const response = await axios.post('https://localhost:44394/api/authentication/login', loggedInUserObject);
+      const response = await axios.post('https://localhost:44394/api/authentication/login/', loggedInUserObject);
       localStorage.setItem('token', response.data.token);
       this.token();
       this.getUserDetails(this.state.userLoggedIn.id);
+      console.log("Login State user:" , this.state.userLoggedIn)
       // window.location='/'
     } catch(error) {
       console.log(error, 'error with logged in user');
+      return error
     }
   }
 
@@ -81,7 +87,7 @@ class App extends Component {
     console.log("User id", userId)
     try {
       let response = await axios.get(`https://localhost:44394/api/users/${userId}`);
-      console.log(response.data);
+      console.log("*** RESPONSE DATA ****", response.data);
       this.setState ({
         userLoggedIn: response.data
       })
@@ -150,16 +156,17 @@ class App extends Component {
     return (
       
       <div className="App">
-        {console.log("loggedin user: ", this.state.userLoggedIn)}
+        {console.log("loggedin user: ", this.state.user)}
 
         <header className="App-header">
           <NavBar />
           <Switch>
-            <Route path = "/" exact component = {Landing} user={this.state.userLoggedIn} getUserDetails={this.getUserDetails}/>
+            
+            <Route exact={true} path = "/" render  = {props => <Landing {...props} user={this.state.userLoggedIn} getUserDetails={this.getUserDetails} /> } />
             <Route path = "/login" render = {props => <Login {...props} login={this.loginUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
             <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />
-            <Route path = "/shoppingcart" render = {props => <ShoppingCart {...props} user={this.userLoggedIn} />} />
+            <Route path = "/shoppingcart" render = {props => <ShoppingCart {...props} user={this.state.userLoggedIn} />} />
             <Route path = "/addNew" render = {props => <AddNewProduct {...props} addNewProduct = {this.addNewProduct} />}  />
             <Route path = "/bookDetails" render = {props =>
                 <ProductDetail {...props}

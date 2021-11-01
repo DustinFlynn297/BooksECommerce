@@ -17,11 +17,10 @@ const ReviewBlock = (props) => {
                 book={props.book}
                 user={props.user}
             />
-            {props.reviews?.map((review) => {
+            {props.reviews?.map((review, index ) => {
                 return (
                 <ul>
-                    <li key={review.productId}> {review.body} </li>
-                    <li key={review.productId}> {review.starRating} </li>
+                    <li key={index}> {review.body} {review.starRating}  </li>
                 </ul>
                 )}
             )}

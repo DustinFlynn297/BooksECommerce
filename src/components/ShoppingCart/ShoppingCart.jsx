@@ -12,11 +12,13 @@ class ShoppingCart extends Component {
     }
 
     getShoppingCart = async () => {
-        let response = await axios.get('https://localhost:44394/api/shoppingCart/')
+        let response = await axios.get(`https://localhost:44394/api/shoppingCart/${this.props.user.userId}`)
     }
 
     render() { 
-        return (  );
+        return ( 
+            <div></div>
+         );
     }
 }
  
