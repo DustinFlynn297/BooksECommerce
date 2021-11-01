@@ -63,7 +63,7 @@ const LoggedInReviewAndCart = (props) => {
 
     if (!currentUser) {
         console.log("user is not logged in ");
-        alert("spoiler alert");
+        // alert("spoiler alert");
         // use either return
         // return <>Please Log in to view our Shopping carts and to leave a review</>;
         return null;

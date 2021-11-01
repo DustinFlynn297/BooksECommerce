@@ -33,9 +33,14 @@ const ProductList = (props) => {
           .map((book) => (
             <tr key={book.id}>
               <td>
-                {book.productName}
-                {book.price}
-                {book.genre}
+              <div className="border">
+                      <p>Title:{book.productName}</p>
+                      <p>       Price: {book.price}</p>
+                      <p>
+                          Genre: {book.genre}
+                      </p>
+                  </div>
+
               </td>
               <td className="buttonCenter">
                 <Link to = {`/bookDetails/${book.id}`}>

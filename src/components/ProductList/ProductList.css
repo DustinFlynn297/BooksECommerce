@@ -3,3 +3,6 @@
     font-size: 20px;
     font-style: weight;
 }
+.border {
+    border-bottom: 1px solid black;
+}

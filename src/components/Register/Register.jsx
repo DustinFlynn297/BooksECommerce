@@ -1,4 +1,32 @@
 import React, {useState} from 'react';
+import styled from "styled-components";
+
+const RegisterDiv = styled.div`
+
+.Register-Container{
+  width: 100%;
+  // height: 100%;
+  background-color: #eeeeee;
+  color: red;
+  display:flex; 
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+
+}
+
+.Register-Input{
+  width: 100%;
+  padding: 12px 20px;
+  // margin: 8px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box
+}
+
+
+
+`
 
 export const RegisterUser = (props) => {
   const [registerUsers, setRegisterUsers] = useState({
@@ -24,22 +52,32 @@ export const RegisterUser = (props) => {
 
   return(
     <div>
+      <RegisterDiv>
       {/*might need to put type of request*/}
+      <div className = "Register-Container">
+        
       <form action="" onSubmit={handleSubmit} >
         <label for="">First Name</label>
-        <input name="FirstName" value={registerUsers.FirstName} onChange={handleChange} type="text"/>
+        <input className = "Register-Input" name="FirstName" value={registerUsers.FirstName} onChange={handleChange} type="text"/>
+        <br/>
         <label htmlFor="">Last Name</label>
-        <input name="LastName" value={registerUsers.LastName} onChange={handleChange} type="text"/>
+        <input className = "Register-Input"  name="LastName" value={registerUsers.LastName} onChange={handleChange} type="text"/>
+        <br/>
         <label htmlFor="">User Name</label>
-        <input name="UserName" value={registerUsers.UserName} onChange={handleChange} type="text"/>
+        <input className = "Register-Input" name="UserName" value={registerUsers.UserName} onChange={handleChange} type="text"/>
+        <br/>
         <label htmlFor="">Password</label>
-        <input name="Password" value={registerUsers.Password} onChange={handleChange} type="text"/>
+        <input className = "Register-Input" name="Password" value={registerUsers.Password} onChange={handleChange} type="text"/>
+        <br/>
         <label htmlFor="">Email</label>
-        <input name="Email" value={registerUsers.Email} onChange={handleChange} type="text"/>
+        <input className = "Register-Input" name="Email" value={registerUsers.Email} onChange={handleChange} type="text"/>
+        <br/>
         <label htmlFor="">Phone Number</label>
-        <input name="PhoneNumber" value={registerUsers.PhoneNumber} onChange={handleChange} type="text"/>
+        <input className = "Register-Input" name="PhoneNumber" value={registerUsers.PhoneNumber} onChange={handleChange} type="text"/>
         <button type="submit">Create Account</button>
       </form>
+      </div>
+      </RegisterDiv>
     </div>
   )
 }
