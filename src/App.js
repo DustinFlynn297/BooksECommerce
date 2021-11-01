@@ -153,14 +153,7 @@ class App extends Component {
 
               />}
             />
-            <Route path = "/books" render={props =>
-                <ProductList
-                    {...props}
-                    getAllBooks={this.getAllBooks}
-                    books = {this.state.books}
-                    getSingleBook = {this.getSingleBook}
-                />}
-            />
+           
             <Redirect to = "/" />
           </Switch>
         </header>
