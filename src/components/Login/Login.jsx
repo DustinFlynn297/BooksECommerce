@@ -1,33 +1,39 @@
 import React, { useState } from "react";
 
 const Login = (props) => {
-  const [loginUser, setLoginUser] = useState({ UserName: "", Password: "" });
+  const [loginUser, setLoginUser] = useState({ userName: "", password: "" });
+
   const handleChange = (event) => {
-    setLoginUser((previousState) => ({
+    setLoginUser(previousState => ({
       ...previousState,
       [event.target.name]: event.target.value,
     }));
   };
+
   const handleSubmit = (event) => {
+    debugger;
+    console.log("Inside Handle Submit")
     event.preventDefault();
     props.loggin(loginUser);
+    console.log("handlesubmit", loginUser)
     window.location = '/';
   };
+
   return (
     <div>
       <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="">Email</label>
+        <label htmlFor="">User Name</label>
         <input
-          name="Email"
-          value={loginUser.Email}
+          name="userName"
+          value={loginUser.userName}
           onChange={handleChange}
           type="text"
         />
         <br />
         <label htmlFor="">Password</label>
         <input
-          name="Password"
-          value={loginUser.Password}
+          name="password"
+          value={loginUser.password}
           onChange={handleChange}
           type="password"
         />
