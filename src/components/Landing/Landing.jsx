@@ -1,11 +1,10 @@
 import "./Landing.css";
-import React, {useState} from "react";
+import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import {RegisterUser} from "../Register/Register";
+// import {RegisterUser} from "../Register/Register";
 
 const Landing = (props) => {
-  const [user, setUser] = useState({});
-  console.log(user);
+  console.log("props.user: ", props.user);
   return (
     <div className="container mx-auto my-auto overflow-hidden">
       <div className="row">

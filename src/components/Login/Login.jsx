@@ -31,18 +31,23 @@ const LoginDiv = styled.div`
 `
 
 const Login = (props) => {
-  const [loginUser, setLoginUser] = useState({ UserName: "", Password: "" });
+  const [loginUser, setLoginUser] = useState({ username: "", password: "" });
+
   const handleChange = (event) => {
-    setLoginUser((previousState) => ({
+    setLoginUser(previousState => ({
       ...previousState,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     }));
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.loggin(loginUser);
-    window.location = '/';
-  };
+  }
+
+  const handleSubmit = (event) => {  
+    debugger;  
+    console.log("Inside Handle Submit")
+    event.preventDefault()
+    props.login(loginUser)
+    console.log("handlesubmit", loginUser);
+  }
+
   return (
     <div>
         <LoginDiv> 

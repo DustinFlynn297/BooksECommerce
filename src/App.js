@@ -25,14 +25,18 @@ class App extends Component {
 
 
   componentDidMount() {
-    this.getAllBooks()
+    this.getAllBooks() ; 
+  }
+
+  token = () => {
     const jwt = localStorage.getItem('token');
     try  {
       const user = jwtDecode(jwt);
-      this.setState({userLoggedIn: user});
-
+      this.setState({
+        userLoggedIn: user
+      });
     }catch(error){
-      console.log(error, "error with componentDidMount");
+      console.log(error, "error with token function");
     }
   }
 
@@ -46,21 +50,21 @@ class App extends Component {
   registerUser = async (userToBeRegisteredObject) => {
     try {
       const response = await axios.post('https://localhost:44394/api/authentication' , userToBeRegisteredObject);
-      this.logInUser({'userName' : userToBeRegisteredObject.userName, 'password': userToBeRegisteredObject.password })
+      this.loginUser({'userName' : userToBeRegisteredObject.userName, 'password': userToBeRegisteredObject.password })
       window.location = '/register';
     } catch(error) {
       console.log(error, 'error with register user');
     }
   }
 
-  logInUser = async (loggedInUserObject) => {
-    try {
-      let response = await axios.post('https://localhost:44394/api/authentication/login', loggedInUserObject);
-
+  loginUser = async (loggedInUserObject) => {
+    console.log("Inside LogInUser Callback")
+    try {      
+      const response = await axios.post('https://localhost:44394/api/authentication/login', loggedInUserObject);
       localStorage.setItem('token', response.data.token);
-      console.log("line 61 app.js" , response.data);
-
-      window.location = '/';
+      this.token();
+      this.getUserDetails(this.state.userLoggedIn.id);
+      // window.location='/'
     } catch(error) {
       console.log(error, 'error with logged in user');
     }
@@ -70,6 +74,21 @@ class App extends Component {
     localStorage.removeItem('token');
     window.location = '/';
     this.setState({userLoggedIn : null});
+  }
+
+  getUserDetails = async (userId) => {
+    // const jwt = localStorage.getItem('token');
+    console.log("User id", userId)
+    try {
+      let response = await axios.get(`https://localhost:44394/api/users/${userId}`);
+      console.log(response.data);
+      this.setState ({
+        userLoggedIn: response.data
+      })
+    }
+    catch (er) {
+      console.log("Error with the userDetails", er)
+    }
   }
 
   getBookReviews = async (bookId) => {
@@ -129,16 +148,18 @@ class App extends Component {
 
   render() {
     return (
+      
       <div className="App">
+        {console.log("loggedin user: ", this.state.userLoggedIn)}
 
         <header className="App-header">
           <NavBar />
           <Switch>
-            <Route path = "/" exact component = {Landing} user={this.state.user}/>
-            <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
+            <Route path = "/" exact component = {Landing} user={this.state.userLoggedIn} getUserDetails={this.getUserDetails}/>
+            <Route path = "/login" render = {props => <Login {...props} login={this.loginUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
             <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />
-            <Route path = "/shoppingcart" render = {props => <ShoppingCart {...props}  />} />
+            <Route path = "/shoppingcart" render = {props => <ShoppingCart {...props} user={this.userLoggedIn} />} />
             <Route path = "/addNew" render = {props => <AddNewProduct {...props} addNewProduct = {this.addNewProduct} />}  />
             <Route path = "/bookDetails" render = {props =>
                 <ProductDetail {...props}
