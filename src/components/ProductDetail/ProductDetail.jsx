@@ -3,7 +3,6 @@ import ReviewBlock from "../ReviewBlock/ReviewBlock";
 
 export const ProductDetail = (props) => {
 
-
     useEffect(() => {
         // alert("here 2");
         // alert(props.getBookReviews);
@@ -13,10 +12,8 @@ export const ProductDetail = (props) => {
 
 
     const book = props.book
-    {
-        console.log("here line 12 product detail")
-    }
 
+    console.log("here line 12 product detail")
     console.log(props.getBookReviews)
 
     return (
@@ -39,7 +36,7 @@ export const ProductDetail = (props) => {
             {/*             getBooksReviews={props.getBookReviews}*/}
             {/*             book={props.book}*/}
             {/*             user={props.user}  />*/}
-            <LoggedInReviewAndCart/>
+            <LoggedInReviewAndCart getBookReviews={props.getBookReviews} />
         </div>
     );
 }
@@ -53,10 +50,10 @@ const LoggedInReviewAndCart = (props) => {
     useEffect(() => {
         // alert("here 2");
         // alert(props.getBookReviews);
-        console.log("line 58 prodcut detail" , props.book.id);
+        console.log("line 58 prodcut detail" );
 
-        props.getBookReviews(props.book.id);
-        console.log("line 58 prodcut detail" , props.book.id);
+        props.getBookReviews(props.book?.id);
+        console.log("line 58 prodcut detail" );
     }, [props.book]);
 
 
