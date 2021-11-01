@@ -20,7 +20,9 @@ class App extends Component {
     books: [],
     reviews: [],
     book: [],
+    user : {}
   }
+
 
   componentDidMount() {
     this.getAllBooks()
@@ -54,7 +56,10 @@ class App extends Component {
   logInUser = async (loggedInUserObject) => {
     try {
       let response = await axios.post('https://localhost:44394/api/authentication/login', loggedInUserObject);
+
       localStorage.setItem('token', response.data.token);
+      console.log("line 61 app.js" , response.data);
+
       window.location = '/';
     } catch(error) {
       console.log(error, 'error with logged in user');
@@ -129,7 +134,7 @@ class App extends Component {
         <header className="App-header">
           <NavBar />
           <Switch>
-            <Route path = "/" exact component = {Landing} />
+            <Route path = "/" exact component = {Landing} user={this.state.user}/>
             <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
             <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />

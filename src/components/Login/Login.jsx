@@ -29,7 +29,7 @@ const Login = (props) => {
           name="Password"
           value={loginUser.Password}
           onChange={handleChange}
-          type="text"
+          type="password"
         />
         <button type = "submit">Login</button>
       </form>
