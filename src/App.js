@@ -50,23 +50,21 @@ class App extends Component {
   registerUser = async (userToBeRegisteredObject) => {
     try {
       const response = await axios.post('https://localhost:44394/api/authentication' , userToBeRegisteredObject);
-      this.logInUser({'userName' : userToBeRegisteredObject.userName, 'password': userToBeRegisteredObject.password })
+      this.loginUser({'userName' : userToBeRegisteredObject.userName, 'password': userToBeRegisteredObject.password })
       window.location = '/register';
     } catch(error) {
       console.log(error, 'error with register user');
     }
   }
 
-  logInUser = async (loggedInUserObject) => {
+  loginUser = async (loggedInUserObject) => {
     console.log("Inside LogInUser Callback")
     try {      
-      let response = await axios.post('https://localhost:44394/api/authentication/login', loggedInUserObject);
+      const response = await axios.post('https://localhost:44394/api/authentication/login', loggedInUserObject);
       localStorage.setItem('token', response.data.token);
       this.token();
-      console.log("*** LoginUser:", this.state.userLoggedIn)
       this.getUserDetails(this.state.userLoggedIn.id);
-      console.log(this.state.userLoggedIn.id)
-      window.location = '/';
+      // window.location='/'
     } catch(error) {
       console.log(error, 'error with logged in user');
     }
@@ -158,7 +156,7 @@ class App extends Component {
           <NavBar />
           <Switch>
             <Route path = "/" exact component = {Landing} user={this.state.userLoggedIn} getUserDetails={this.getUserDetails}/>
-            <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
+            <Route path = "/login" render = {props => <Login {...props} login={this.loginUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
             <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />
             <Route path = "/shoppingcart" render = {props => <ShoppingCart {...props} user={this.userLoggedIn} />} />

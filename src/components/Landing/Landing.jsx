@@ -1,18 +1,17 @@
 import "./Landing.css";
-import React, {useState} from "react";
+import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 // import {RegisterUser} from "../Register/Register";
 
 const Landing = (props) => {
-  // const [user, setUser] = useState({});
   console.log("props.user: ", props.user);
   return (
     <div className="container mx-auto my-auto overflow-hidden">
       <div className="row">
         <h1>Welcome to BB*</h1>
 
-        <p>{!props.user}</p>
-        {/* <p>{props.user.firstName}</p> */}
+        {/* <p>{!props.user}</p> */}
+        <p>{props.user.firstName}</p>
         <p>{JSON.stringify(props.user)}</p>
       </div>
       <div className="row">
