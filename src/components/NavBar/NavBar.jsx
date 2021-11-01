@@ -24,6 +24,9 @@ function NavBar() {
         <Link to="/addNew">
         <Button variant="primary">Add New Book</Button>
         </Link>
+        <Link to="/shoppingcart">
+          <Button variant="primary">Shopping Cart</Button>
+        </Link>
       </nav>
     </container>
   );

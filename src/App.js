@@ -10,6 +10,7 @@ import ProductList from './components/ProductList/ProductList';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import AddNewProduct from './components/AddNewProduct/AddNewProduct';
 import NavBar from './components/NavBar/NavBar';
+import {ShoppingCart} from "./components/ShoppingCart/ShoppingCart";
 // import {registerUser} from ''
 
 
@@ -132,7 +133,8 @@ class App extends Component {
             <Route path = "/login" render = {props => <Login {...props} loggin = {this.logInUser}/>} />
             <Route path = "/register" render = {props => <RegisterUser {...props} registerUser = {this.registerUser} /> }/>
             <Route path = "/books" render = {props => <ProductList {...props} getAllBooks = {this.getAllBooks} books = {this.state.books} getSingleBook = {this.getSingleBook} />} />
-            <Route path = "/addNew" render = {props => <AddNewProduct {...props} addNewProduct = {this.addNewProduct} />} />
+            <Route path = "/shoppingcart" render = {props => <ShoppingCart {...props}  />} />
+            <Route path = "/addNew" render = {props => <AddNewProduct {...props} addNewProduct = {this.addNewProduct} />}  />
             <Route path = "/bookDetails" render = {props =>
                 <ProductDetail {...props}
                      user={this.state.userLoggedIn}
@@ -143,6 +145,7 @@ class App extends Component {
                      postReview={this.postReview}
                      getBookReviews={this.getBookReviews}
                      reviews={this.state.reviews}
+
               />}
             />
             <Route path = "/books" render={props =>

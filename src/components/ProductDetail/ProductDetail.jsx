@@ -11,24 +11,76 @@ export const ProductDetail = (props) => {
         props.getBookReviews(props.book.id)
     }, [props.book]);
 
+
     const book = props.book
-    {console.log("here line 12 product detail")}
+    {
+        console.log("here line 12 product detail")
+    }
 
     console.log(props.getBookReviews)
 
+    return (
+        <div>
+            <h1> Title: {book.productName} </h1>
+            <p> {book.productDescription} </p>
+            <p>Price: {book.price} </p>
+            <p> Genre: {book.genre} </p>
+            {/*<div>*/}
+            {/*    /!*Should not even see unless user is logged in *!/*/}
+            {/*    <button onClick = {() => props.addToCart({*/}
+            {/*        UserId: props.user.id,*/}
+            {/*        BookId: book.id,*/}
+            {/*        Quantity: 1*/}
+            {/*    })}*/}
+            {/*    variant = "Success">Add To Cart</button>*/}
+            {/*</div>*/}
+            {/*<ReviewBlock reviews={props.reviews}*/}
+            {/*             postReview={props.postReview}*/}
+            {/*             getBooksReviews={props.getBookReviews}*/}
+            {/*             book={props.book}*/}
+            {/*             user={props.user}  />*/}
+            <LoggedInReviewAndCart/>
+        </div>
+    );
+}
+
+const LoggedInReviewAndCart = (props) => {
+
+    const currentUser = props.user;
+    const book = props.book
+
+
+    useEffect(() => {
+        // alert("here 2");
+        // alert(props.getBookReviews);
+        console.log("line 58 prodcut detail" , props.book.id);
+
+        props.getBookReviews(props.book.id);
+        console.log("line 58 prodcut detail" , props.book.id);
+    }, [props.book]);
+
+
+
+    console.log("here line 12 product detail")
+
+
+    if (!currentUser) {
+        console.log("user is not logged in ");
+        alert("spoiler alert");
+        return <>Please Log in to view our Shopping carts and to leave a review</>;
+        // return null
+    }
+
     return(
         <div>
-            <h1> {book.productName} </h1>
-            <p> {book.productDescription} </p>
-            <p> {book.price} </p>
-            <p> {book.genre} </p>
             <div>
+                {/*Should not even see unless user is logged in */}
                 <button onClick = {() => props.addToCart({
                     UserId: props.user.id,
                     BookId: book.id,
                     Quantity: 1
                 })}
-                variant = "Success">Add To Cart</button>
+                        variant = "Success">Add To Cart</button>
             </div>
             <ReviewBlock reviews={props.reviews}
                          postReview={props.postReview}
