@@ -9,8 +9,8 @@ const Landing = (props) => {
     <div className="container mx-auto my-auto overflow-hidden">
       <div className="row">
         <h1>Welcome to BB's Online Book Store</h1>
-        <p>{props.user?.firstName}</p>
-        <p>{JSON.stringify(props.user)}</p>
+        {/* <p>{props.user?.firstName}</p> */}
+        {/* <p>{JSON.stringify(props.user)}</p> */}
       </div>
       <div className="row">
         <div className="col-4"></div>

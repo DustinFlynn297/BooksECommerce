@@ -41,12 +41,12 @@ const Login = (props) => {
   }
 
   const handleSubmit = (event) => {  
-    debugger;  
+    // debugger;  
     console.log("Inside Handle Submit")
     event.preventDefault()
     console.log("handlesubmit", loginUser);
     props.login(loginUser)
-
+    window.location = '/';
   }
 
   return (

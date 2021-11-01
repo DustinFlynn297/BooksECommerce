@@ -46,6 +46,8 @@ class AddNewProduct extends Component {
       genre: this.state.genre
     }
     this.props.addNewProduct(newProduct)
+    window.location = '/addNew'
+    alert("Success!")
   }
   render() {
     return (
